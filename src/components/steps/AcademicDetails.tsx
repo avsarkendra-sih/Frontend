@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import {
   FormField,
@@ -8,9 +8,9 @@ import {
   FormMessage,
 } from "../ui/f_form";
 import { Input } from "../ui/f_input";
-import { Button } from "../ui/f_button";
+// import { Button } from "../ui/f_button";
 import { InfoTooltip } from "../InfoTooltip";
-import { Card, CardContent } from "../ui/f_card";
+// import { Card, CardContent } from "../ui/f_card";
 import {
   Select,
   SelectContent,
@@ -19,31 +19,35 @@ import {
   SelectValue,
 } from "../ui/f_select";
 import { Switch } from "../ui/f_switch";
-import { PlusIcon, TrashIcon } from "lucide-react";
-import { v4 as uuidv4 } from "uuid";
+// import { PlusIcon, TrashIcon } from "lucide-react";
+// import { v4 as uuidv4 } from "uuid";
 export function AcademicDetails() {
   const { control, watch } = useFormContext();
   const nextQualification = watch("academicDetails.nextQualification");
-  const otherCourses = watch("academicDetails.otherCourses") || [];
-  const addOtherCourse = () => {
-    const { setValue } = control._formState.context;
-    setValue("academicDetails.otherCourses", [
-      ...otherCourses,
-      {
-        id: uuidv4(),
-        title: "",
-        institution: "",
-        duration: "",
-      },
-    ]);
-  };
-  const removeOtherCourse = (id: string) => {
-    const { setValue } = control._formState.context;
-    setValue(
-      "academicDetails.otherCourses",
-      otherCourses.filter((course) => course.id !== id)
-    );
-  };
+  console.log(nextQualification)
+
+  // const otherCourses = watch("academicDetails.otherCourses") || [];
+  
+  // const addOtherCourse = () => {
+  //   const { setValue } = control._formState.context;
+  //   setValue("academicDetails.otherCourses", [
+  //     ...otherCourses,
+  //     {
+  //       id: uuidv4(),
+  //       title: "",
+  //       institution: "",
+  //       duration: "",
+  //     },
+  //   ]);
+  // };
+  // const removeOtherCourse = (id: string) => {
+  //   const { setValue } = control._formState.context;
+  //   setValue(
+  //     "academicDetails.otherCourses",
+  //     otherCourses.filter((course) => course.id !== id)
+  //   );
+  // };
+
   const yearOptions = Array.from(
     {
       length: 30,
@@ -57,6 +61,7 @@ export function AcademicDetails() {
       );
     }
   );
+
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold">Academic Details</h2>
@@ -142,6 +147,7 @@ export function AcademicDetails() {
               <FormItem>
                 <FormLabel>
                   Marks Type <span className="text-red-500">*</span>
+                  <InfoTooltip text="Select the Marks Type (according to your marksheet)" />
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
@@ -209,6 +215,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Grade <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter your Marks in Grade" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -223,19 +230,6 @@ export function AcademicDetails() {
             />
           )}
 
-          {/* 
-          <FormField control={control} name="academicDetails.tenth.percentage" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  Percentage/CGPA{' '}
-                  <InfoTooltip text="Enter your 10th class percentage or CGPA" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Enter percentage or CGPA" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} /> */}
         </div>
       </div>
 
@@ -276,6 +270,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     School/College Name <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the name of your 12th class school" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -295,6 +290,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Board <span className="text-red-500">*</span>
+                    <InfoTooltip text="Select your 12th class education board" />
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -323,6 +319,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Year of Passing <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the year when you've completed your Undergraduation" />
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -339,25 +336,98 @@ export function AcademicDetails() {
                 </FormItem>
               )}
             />
+
             <FormField
               control={control}
-              name="academicDetails.twelfth.percentage"
+              name="academicDetails.twelfth.marksType"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Percentage/CGPA <span className="text-red-500">*</span>
+                    Marks Type <span className="text-red-500">*</span>
+                    <InfoTooltip text="Select the Marks Type (according to your marksheet)" />
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Enter percentage or CGPA"
-                      required
-                    />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select marks type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="percentage">Percentage</SelectItem>
+                      <SelectItem value="cgpa">CGPA</SelectItem>
+                      <SelectItem value="grade">Grade</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {watch("academicDetails.twelfth.marksType") === "percentage" && (
+              <FormField
+                control={control}
+                name="academicDetails.twelfth.percentage"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Percentage <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Enter percentage"
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {watch("academicDetails.twelfth.marksType") === "cgpa" && (
+              <FormField
+                control={control}
+                name="academicDetails.twelfth.cgpa"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      CGPA <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter CGPA" required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {watch("academicDetails.twelfth.marksType") === "grade" && (
+              <FormField
+                control={control}
+                name="academicDetails.twelfth.grade"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Grade <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your Marks in Grade" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Enter Grade (e.g. A, B+)"
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
         </div>
       )}
@@ -374,6 +444,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Diploma College Name <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the name of your Diploma College" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -393,6 +464,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Diploma Stream <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the name of your Diploma Stream" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -412,6 +484,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Year of Passing <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the year when you have completed your Diploma" />
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -428,25 +501,98 @@ export function AcademicDetails() {
                 </FormItem>
               )}
             />
+
             <FormField
               control={control}
-              name="academicDetails.diploma.percentage"
+              name="academicDetails.diploma.marksType"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Percentage/CGPA <span className="text-red-500">*</span>
+                    Marks Type <span className="text-red-500">*</span>
+                    <InfoTooltip text="Select the Marks Type (according to your marksheet)" />
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Enter percentage or CGPA"
-                      required
-                    />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select marks type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="percentage">Percentage</SelectItem>
+                      <SelectItem value="cgpa">CGPA</SelectItem>
+                      <SelectItem value="grade">Grade</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {watch("academicDetails.diploma.marksType") === "percentage" && (
+              <FormField
+                control={control}
+                name="academicDetails.diploma.percentage"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Percentage <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Enter percentage"
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {watch("academicDetails.diploma.marksType") === "cgpa" && (
+              <FormField
+                control={control}
+                name="academicDetails.diploma.cgpa"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      CGPA <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter CGPA" required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {watch("academicDetails.diploma.marksType") === "grade" && (
+              <FormField
+                control={control}
+                name="academicDetails.diploma.grade"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Grade <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your marks in Grade" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Enter Grade (e.g. A, B+)"
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
         </div>
       )}
@@ -463,6 +609,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     ITI Institute Name <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the name of your ITI Institute" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -482,6 +629,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Trade <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the name of your ITI Trade" />
                   </FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Enter trade name" required />
@@ -497,6 +645,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Year of Passing <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the year when you have completed your ITI" />
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -513,214 +662,102 @@ export function AcademicDetails() {
                 </FormItem>
               )}
             />
+           
+
             <FormField
               control={control}
-              name="academicDetails.iti.percentage"
+              name="academicDetails.iti.marksType"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Percentage/CGPA <span className="text-red-500">*</span>
+                    Marks Type <span className="text-red-500">*</span>
+                    <InfoTooltip text="Select the Marks Type (according to your marksheet)" />
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Enter percentage or CGPA"
-                      required
-                    />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select marks type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="percentage">Percentage</SelectItem>
+                      <SelectItem value="cgpa">CGPA</SelectItem>
+                      <SelectItem value="grade">Grade</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {watch("academicDetails.iti.marksType") === "percentage" && (
+              <FormField
+                control={control}
+                name="academicDetails.iti.percentage"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Percentage <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Enter percentage"
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {watch("academicDetails.iti.marksType") === "cgpa" && (
+              <FormField
+                control={control}
+                name="academicDetails.iti.cgpa"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      CGPA <span className="text-red-500">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter CGPA" required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {watch("academicDetails.iti.marksType") === "grade" && (
+              <FormField
+                control={control}
+                name="academicDetails.iti.grade"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Grade <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your Marks in Grade" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Enter Grade (e.g. A, B+)"
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
         </div>
       )}
-
-      {/* <FormField
-  control={control}
-  name="academicDetails.nextQualification"
-  rules={{ required: 'Please select your next qualification' }}
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>
-        Next Qualification <span className="text-red-500">*</span>
-      </FormLabel>
-      <FormControl>
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select qualification" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="iti">ITI</SelectItem>
-            <SelectItem value="diploma">Diploma</SelectItem>
-            <SelectItem value="degree">12th</SelectItem>
-          </SelectContent>
-        </Select>
-      </FormControl>
-      <FormMessage />
-    </FormItem>
-  )}
-/> */}
-      {/* 12th Class / Diploma */}
-      {/* <div className="space-y-4">
-        <h3 className="text-lg font-medium">12th Class / Diploma</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField control={control} name="academicDetails.twelfth.schoolName" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  School/College Name{' '}
-                  <InfoTooltip text="Enter the name of your 12th class school or diploma institution" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Enter school/college name" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.twelfth.board" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  Board{' '}
-                  <InfoTooltip text="Select your 12th class education board" />
-                </FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select board" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="cbse">CBSE</SelectItem>
-                    <SelectItem value="icse">ISC</SelectItem>
-                    <SelectItem value="state">State Board</SelectItem>
-                    <SelectItem value="diploma">Diploma Board</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.twelfth.yearOfPassing" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  Year of Passing{' '}
-                  <InfoTooltip text="Select the year you passed 12th class or diploma" />
-                </FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select year" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>{yearOptions}</SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.twelfth.percentage" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  Percentage/CGPA{' '}
-                  <InfoTooltip text="Enter your 12th class or diploma percentage or CGPA" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Enter percentage or CGPA" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-        </div>
-      </div> */}
-      {/* Undergraduate (UG) */}
-      {/* <div className="space-y-4">
-        <h3 className="text-lg font-medium">Undergraduate (UG)</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField control={control} name="academicDetails.undergraduate.collegeName" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  College Name{' '}
-                  <InfoTooltip text="Enter the name of your undergraduate college" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Enter college name" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.undergraduate.university" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  University{' '}
-                  <InfoTooltip text="Enter the name of your university" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Enter university name" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.undergraduate.branch" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  Branch <InfoTooltip text="Enter your branch or major" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="E.g., Computer Science, Mechanical" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.undergraduate.currentYearSem" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  Current Year{' '}
-                  <InfoTooltip text="Enter your current year or semester" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="E.g., 3rd Year, 6th Semester" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.undergraduate.cgpaPercentage" render={({
-          field
-           }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  Current Semester{' '}
-                  <InfoTooltip text="Enter your current year or semester" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="E.g., 3rd Year, 6th Semester" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.undergraduate.cgpaPercentage" render={({
-          field
-        }) => <FormItem>
-                <FormLabel className="flex items-center">
-                  CGPA/Percentage{' '}
-                  <InfoTooltip text="Enter your current CGPA or percentage" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="Enter CGPA or percentage" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>} />
-          <FormField control={control} name="academicDetails.undergraduate.backlogs" render={({
-          field
-        }) => <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormLabel className="text-base flex items-center">
-                    Backlogs{' '}
-                    <InfoTooltip text="Do you have any active backlogs?" />
-                  </FormLabel>
-                </div>
-                <FormControl>
-                  <Switch checked={field.value} onCheckedChange={field.onChange} />
-                </FormControl>
-              </FormItem>} />
-        </div>
-      </div> */}
 
       {/* Undergraduate (UG) */}
       <div className="space-y-4">
@@ -734,6 +771,7 @@ export function AcademicDetails() {
             <FormItem>
               <FormLabel>
                 Status <span className="text-red-500">*</span>
+                <InfoTooltip text="Enter whether you're pursuing UG or Graduated" />
               </FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
@@ -761,6 +799,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     College Name <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the name of your college from where you've done your Undergraduation" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -780,6 +819,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     University <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the name of your University from where you've done your Undergraduation" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -799,6 +839,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Year of Passing <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter the year when you've completed your Undergraduation" />
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -824,6 +865,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Marks Type <span className="text-red-500">*</span>
+                    <InfoTooltip text="Select the Marks Type (according to your marksheet)" />
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -855,6 +897,7 @@ export function AcademicDetails() {
                   <FormItem>
                     <FormLabel>
                       Percentage <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your marks in percentage" />
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -877,6 +920,7 @@ export function AcademicDetails() {
                   <FormItem>
                     <FormLabel>
                       CGPA <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your marks in CGPA" />
                     </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="Enter CGPA" required />
@@ -895,6 +939,7 @@ export function AcademicDetails() {
                   <FormItem>
                     <FormLabel>
                       Grade <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your marks in Grade" />
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -909,21 +954,6 @@ export function AcademicDetails() {
               />
             )}
 
-            <FormField
-              control={control}
-              name="academicDetails.undergraduate.backlogs"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <FormLabel>Any Backlogs </FormLabel>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
           </div>
         )}
 
@@ -935,7 +965,8 @@ export function AcademicDetails() {
               name="academicDetails.undergraduate.collegeName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>College Name *</FormLabel>
+                  <FormLabel>College Name <span className="text-red-500"> *</span></FormLabel>
+                  <InfoTooltip text="Enter your College Name in which you're studying" />
                   <FormControl>
                     <Input
                       {...field}
@@ -954,6 +985,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     University <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter your University Name in which you're studying" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -973,6 +1005,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Branch <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter your Branch Name in which you're studying" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -992,6 +1025,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Current Year <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter your current College Year in which you're studying (e.g. - 3rd Year)" />
                   </FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="E.g. 3rd Year" required />
@@ -1007,6 +1041,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Current Semester <span className="text-red-500">*</span>
+                    <InfoTooltip text="Enter your current College Semester in which you're studying (e.g. - 6th Semester)" />
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -1027,6 +1062,7 @@ export function AcademicDetails() {
                 <FormItem>
                   <FormLabel>
                     Current Marks Type <span className="text-red-500">*</span>
+                    <InfoTooltip text="Select your current marks (according to your Marksheet)" />
                   </FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -1058,6 +1094,7 @@ export function AcademicDetails() {
                   <FormItem>
                     <FormLabel>
                       Current Percentage <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your current marks in Percentage" />
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -1081,6 +1118,7 @@ export function AcademicDetails() {
                   <FormItem>
                     <FormLabel>
                       Current CGPA <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your current marks in CGPA" />
                     </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="Enter CGPA" required />
@@ -1100,6 +1138,7 @@ export function AcademicDetails() {
                   <FormItem>
                     <FormLabel>
                       Current Grade <span className="text-red-500">*</span>
+                      <InfoTooltip text="Enter your current marks in Grade" />
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -1119,7 +1158,10 @@ export function AcademicDetails() {
               name="academicDetails.undergraduate.backlogs"
               render={({ field }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <FormLabel>Any Backlogs?</FormLabel>
+                  <FormLabel>Any Backlogs?
+                    <InfoTooltip text="Switch it on if you've any backlogs, else keep it off" />
+                  </FormLabel>
+                 
                   <FormControl>
                     <Switch
                       checked={field.value}
@@ -1131,163 +1173,6 @@ export function AcademicDetails() {
             />
           </div>
         )}
-      </div>
-
-      {/* Postgraduate (PG) - Optional */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-medium">Postgraduate (PG) - Optional</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField
-            control={control}
-            name="academicDetails.postgraduate.collegeName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center">
-                  College Name{" "}
-                  <InfoTooltip text="Enter the name of your postgraduate college" />
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="Enter college name (optional)"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="academicDetails.postgraduate.branch"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center">
-                  Branch{" "}
-                  <InfoTooltip text="Enter your postgraduate branch or specialization" />
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="E.g., MBA Finance, M.Tech AI (optional)"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="academicDetails.postgraduate.cgpaPercentage"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center">
-                  CGPA/Percentage{" "}
-                  <InfoTooltip text="Enter your postgraduate CGPA or percentage" />
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="Enter CGPA or percentage (optional)"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-      </div>
-      {/* Other Courses / Trainings */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-medium">
-            Other Courses / Trainings (Optional)
-          </h3>
-          <Button
-            type="button"
-            onClick={addOtherCourse}
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1"
-          >
-            <PlusIcon className="h-4 w-4" /> Add Course
-          </Button>
-        </div>
-        <div className="space-y-4">
-          {otherCourses.map((course, index) => (
-            <Card key={course.id} className="border border-border">
-              <CardContent className="p-4">
-                <div className="flex justify-between items-center mb-4">
-                  <h4 className="font-medium">Course #{index + 1}</h4>
-                  <Button
-                    type="button"
-                    onClick={() => removeOtherCourse(course.id)}
-                    variant="ghost"
-                    size="sm"
-                    className="text-destructive hover:text-destructive"
-                  >
-                    <TrashIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <FormField
-                    control={control}
-                    name={`academicDetails.otherCourses.${index}.title`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Course Title</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="E.g., Web Development, Data Science"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={control}
-                    name={`academicDetails.otherCourses.${index}.institution`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Institution</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="Institution or platform name"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={control}
-                    name={`academicDetails.otherCourses.${index}.duration`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Duration</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="E.g., 3 months, Jan-Mar 2023"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-          {otherCourses.length === 0 && (
-            <div className="text-center p-6 border border-dashed rounded-md text-muted-foreground">
-              No courses added yet. Click "Add Course" to include additional
-              qualifications.
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

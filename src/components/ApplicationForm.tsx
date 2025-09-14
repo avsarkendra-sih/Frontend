@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from './ui/f_card';

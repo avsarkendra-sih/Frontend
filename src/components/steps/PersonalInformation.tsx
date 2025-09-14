@@ -2,7 +2,7 @@ import  { useEffect } from 'react';
 
 import {  FormItem, FormLabel, FormControl, FormMessage } from '../ui/f_form';
 import { Input } from '../ui/f_input';
-import { Label } from '../ui/f_label';
+// import { Label } from '../ui/f_label';
 import { InfoTooltip } from '../InfoTooltip';
 import { Checkbox } from '../ui/f_checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/f_select';
