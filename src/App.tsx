@@ -8,6 +8,7 @@ import Gallery from "./pages/Gallery";
 import Support from "./pages/Support";
 import Eligibility from "./pages/Eligibility";
 import NotFound from "./pages/NotFound";
+import { ApplicationForm } from "./components/ApplicationForm";
 
 function App() {
   return (
@@ -21,7 +22,10 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/support" element={<Support />} />
           <Route path="/eligibility" element={<Eligibility />} />
+          <Route path="/form" element={<ApplicationForm />} />
           <Route path="*" element={<NotFound />} />
+          
+
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
