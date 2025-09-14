@@ -17,10 +17,7 @@ import { Path } from "react-hook-form";
 const STEPS = [{
   id: 'personal-information' as FormStep,
   label: 'Personal Info'
-}, {
-  id: 'academic-details' as FormStep,
-  label: 'Academic Details'
-}, {
+},  {
   id: 'skills-projects-certifications' as FormStep,
   label: 'Skills & Projects'
 }, {

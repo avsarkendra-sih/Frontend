@@ -19,6 +19,8 @@ import { format } from "date-fns";
 import { CalendarIcon, PlusIcon, TrashIcon, X } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { v4 as uuidv4 } from "uuid";
+import { useApplicationFormStore } from '../../store/useApplicationFormStore';
+
 // Sample skill options
 const SKILL_OPTIONS = {
   technical: [
@@ -97,111 +99,86 @@ const SKILL_OPTIONS = {
   ],
 };
 export function SkillsProjectsCertifications() {
-  const { control, watch, setValue } = useFormContext();
-  const skills = watch("skillsProjectsCertifications.skills") || {
-    technical: [],
-    softSkills: [],
-    languages: [],
-    tools: [],
-  };
-  const certifications =
-    watch("skillsProjectsCertifications.certifications") || [];
-  const projects = watch("skillsProjectsCertifications.projects") || [];
-  const achievements = watch("skillsProjectsCertifications.achievements") || [];
-  // Add new items
+  const { control } = useFormContext();
+
+  const { skillsProjects, setSkillsProjects } = useApplicationFormStore((state) => ({
+    skillsProjects: state.skillsProjects,
+    setSkillsProjects: state.setSkillsProjects,
+  }));
+
+
+  const { skills, certifications, projects, achievements } = skillsProjects;
+
+  // ---- Helpers ----
   const addCertification = () => {
-    setValue("skillsProjectsCertifications.certifications", [
-      ...certifications,
-      {
-        id: uuidv4(),
-        title: "",
-        startDate: null,
-        endDate: null,
-        file: null,
-      },
-    ]);
+    setSkillsProjects({
+      certifications: [
+        ...certifications,
+        { id: uuidv4(), title: "", startDate: null, endDate: null, file: null },
+      ],
+    });
   };
-  const addProject = () => {
-    setValue("skillsProjectsCertifications.projects", [
-      ...projects,
-      {
-        id: uuidv4(),
-        title: "",
-        description: "",
-        techStack: [],
-        duration: "",
-      },
-    ]);
-  };
-  const addAchievement = () => {
-    setValue("skillsProjectsCertifications.achievements", [
-      ...achievements,
-      {
-        id: uuidv4(),
-        description: "",
-      },
-    ]);
-  };
-  // Remove items
+
   const removeCertification = (id: string) => {
-    setValue(
-      "skillsProjectsCertifications.certifications",
-      certifications.filter((cert) => cert.id !== id)
-    );
+    setSkillsProjects({
+      certifications: certifications.filter((c) => c.id !== id),
+    });
   };
+
+  const addProject = () => {
+    setSkillsProjects({
+      projects: [
+        ...projects,
+        { id: uuidv4(), title: "", description: "", techStack: [], duration: "" },
+      ],
+    });
+  };
+
   const removeProject = (id: string) => {
-    setValue(
-      "skillsProjectsCertifications.projects",
-      projects.filter((project) => project.id !== id)
-    );
+    setSkillsProjects({
+      projects: projects.filter((p) => p.id !== id),
+    });
   };
+
+  const addAchievement = () => {
+    setSkillsProjects({
+      achievements: [...achievements, { id: uuidv4(), description: "" }],
+    });
+  };
+
   const removeAchievement = (id: string) => {
-    setValue(
-      "skillsProjectsCertifications.achievements",
-      achievements.filter((achievement) => achievement.id !== id)
-    );
+    setSkillsProjects({
+      achievements: achievements.filter((a) => a.id !== id),
+    });
   };
-  // Add skill
-  const addSkill = (category: string, skill: string) => {
-    const currentSkills = skills[category as keyof typeof skills] || [];
-    if (!currentSkills.includes(skill)) {
-      setValue(`skillsProjectsCertifications.skills.${category}`, [
-        ...currentSkills,
-        skill,
-      ]);
+
+  const addSkill = (category: keyof typeof skills, skill: string) => {
+    if (!skills[category].includes(skill)) {
+      setSkillsProjects({
+        skills: { ...skills, [category]: [...skills[category], skill] },
+      });
     }
   };
-  // Remove skill
-  const removeSkill = (category: string, skill: string) => {
-    const currentSkills = skills[category as keyof typeof skills] || [];
-    setValue(
-      `skillsProjectsCertifications.skills.${category}`,
-      currentSkills.filter((s) => s !== skill)
-    );
+
+  const removeSkill = (category: keyof typeof skills, skill: string) => {
+    setSkillsProjects({
+      skills: {
+        ...skills,
+        [category]: skills[category].filter((s) => s !== skill),
+      },
+    });
   };
-  // Add tech stack item
+
   const addTechStackItem = (index: number, item: string) => {
-    const project = projects[index];
-    if (project && item && !project.techStack.includes(item)) {
-      const updatedTechStack = [...project.techStack, item];
-      setValue(
-        `skillsProjectsCertifications.projects.${index}.techStack`,
-        updatedTechStack
-      );
-    }
+    const updated = [...projects];
+    updated[index].techStack.push(item);
+    setSkillsProjects({ projects: updated });
   };
-  // Remove tech stack item
+
   const removeTechStackItem = (index: number, item: string) => {
-    const project = projects[index];
-    if (project) {
-      const updatedTechStack = project.techStack.filter(
-        (tech) => tech !== item
-      );
-      setValue(
-        `skillsProjectsCertifications.projects.${index}.techStack`,
-        updatedTechStack
-      );
-    }
+    const updated = [...projects];
+    updated[index].techStack = updated[index].techStack.filter((t) => t !== item);
+    setSkillsProjects({ projects: updated });
   };
   return (
     <div className="space-y-6">

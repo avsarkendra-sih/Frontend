@@ -80,13 +80,7 @@ const AuthModals = () => {
   };
 
   // Email/Password se signUp
-  const handleSignUp = async (data: SignUpFormData) => {
-    setIsLoading(true);
-    const { fullName, dob, email, password, mobile } = data;
-
-   try{
-    const res= await axios
-   }
+ 
 
   
   const handleGoogleSignIn = async () => {
@@ -173,7 +167,7 @@ const AuthModals = () => {
               </DialogTitle>
             </DialogHeader>
 
-            <form onSubmit={handleSignUpSubmit(handleSignUp)} className="space-y-4 mt-4">
+            <form onSubmit={handleSignUpSubmit(handleGoogleSignIn)} className="space-y-4 mt-4">
               <div className="space-y-2">
                 <Label htmlFor="fullName">Full Name</Label>
                 <Input
