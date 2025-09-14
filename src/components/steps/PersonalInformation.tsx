@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '../ui/f_form';
 import { Input } from '../ui/f_input';
-import { Label } from '../ui/f_label';
+// import { Label } from '../ui/f_label';
 import { InfoTooltip } from '../InfoTooltip';
 import { Checkbox } from '../ui/f_checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/f_select';
@@ -32,22 +32,7 @@ export function PersonalInformation() {
   return <div className="space-y-6">
       <h2 className="text-xl font-semibold">Personal Information</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Profile Photo Upload */}
-        {/* <FormField control={control} name="personalInfo.profilePhoto" render={({
-        field
-      }) => <FormItem>
-              <FormLabel className="flex items-center">
-                Profile Photo{' '}
-                <InfoTooltip text="Upload a professional photo for your profile" />
-              </FormLabel>
-              <FormControl>
-                <Input type="file" accept="image/*" onChange={e => {
-            const file = e.target.files?.[0];
-            field.onChange(file);
-          }} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>} /> */}
+
         {/* Full Name - Prefilled, non-editable */}
         <FormField control={control} name="personalInfo.fullName" render={({
         field
@@ -288,7 +273,7 @@ export function PersonalInformation() {
       }) => <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
                 <FormLabel className="text-base flex items-center">
-                  Disability Status{' '} <span className="text-red-500">*</span>
+                  Disability Status{' '}
                   <InfoTooltip text="Do you have any disability?" />
                 </FormLabel>
               </div>
