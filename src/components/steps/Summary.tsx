@@ -3,19 +3,16 @@ import { format } from 'date-fns';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/f_card';
 import { Badge } from '../ui/f_badge';
 import { FormData } from '../../lib/types';
-interface SummaryProps {
+import { useApplicationFormStore } from '@/store/useApplicationFormStore';
+
+
+type SummaryProps = {
   formData: FormData;
-}
-export function Summary({
-  formData
-}: SummaryProps) {
-  const {
-    personalInfo,
-    academicDetails,
-    skillsProjectsCertifications,
-    uploads,
-    preferencesCareerInterests
-  } = formData;
+};
+
+export function Summary({formData}:SummaryProps){
+  const { personalInfo, academicDetails, skillsProjects, uploads, preferencesCareerInterests } = useApplicationFormStore();
+ 
   // Helper function to format dates
   const formatDate = (date: Date | null) => {
     if (!date) return 'Not specified';
@@ -248,10 +245,10 @@ export function Summary({
                     Technical Skills
                   </p>
                   <div className="flex flex-wrap gap-1 mt-1">
-                    {skillsProjectsCertifications.skills.technical?.map(skill => <Badge key={skill} variant="secondary">
+                    {skillsProjects.skills.technical?.map(skill => <Badge key={skill} variant="secondary">
                           {skill}
                         </Badge>)}
-                    {!skillsProjectsCertifications.skills.technical?.length && <span className="text-sm text-muted-foreground">
+                    {!skillsProjects.skills.technical?.length && <span className="text-sm text-muted-foreground">
                         None specified
                       </span>}
                   </div>
@@ -259,10 +256,10 @@ export function Summary({
                 <div>
                   <p className="text-sm text-muted-foreground">Soft Skills</p>
                   <div className="flex flex-wrap gap-1 mt-1">
-                    {skillsProjectsCertifications.skills.softSkills?.map(skill => <Badge key={skill} variant="secondary">
+                    {skillsProjects.skills.softSkills?.map(skill => <Badge key={skill} variant="secondary">
                           {skill}
                         </Badge>)}
-                    {!skillsProjectsCertifications.skills.softSkills?.length && <span className="text-sm text-muted-foreground">
+                    {!skillsProjects.skills.softSkills?.length && <span className="text-sm text-muted-foreground">
                         None specified
                       </span>}
                   </div>
@@ -270,10 +267,10 @@ export function Summary({
                 <div>
                   <p className="text-sm text-muted-foreground">Languages</p>
                   <div className="flex flex-wrap gap-1 mt-1">
-                    {skillsProjectsCertifications.skills.languages?.map(lang => <Badge key={lang} variant="secondary">
+                    {skillsProjects.skills.languages?.map(lang => <Badge key={lang} variant="secondary">
                           {lang}
                         </Badge>)}
-                    {!skillsProjectsCertifications.skills.languages?.length && <span className="text-sm text-muted-foreground">
+                    {!skillsProjects.skills.languages?.length && <span className="text-sm text-muted-foreground">
                         None specified
                       </span>}
                   </div>
@@ -281,20 +278,20 @@ export function Summary({
                 <div>
                   <p className="text-sm text-muted-foreground">Tools</p>
                   <div className="flex flex-wrap gap-1 mt-1">
-                    {skillsProjectsCertifications.skills.tools?.map(tool => <Badge key={tool} variant="secondary">
+                    {skillsProjects.skills.tools?.map(tool => <Badge key={tool} variant="secondary">
                         {tool}
                       </Badge>)}
-                    {!skillsProjectsCertifications.skills.tools?.length && <span className="text-sm text-muted-foreground">
+                    {!skillsProjects.skills.tools?.length && <span className="text-sm text-muted-foreground">
                         None specified
                       </span>}
                   </div>
                 </div>
               </div>
             </div>
-            {skillsProjectsCertifications.certifications.length > 0 && <div>
+            {skillsProjects.certifications.length > 0 && <div>
                 <h3 className="font-medium mb-2">Certifications</h3>
                 <div className="space-y-2 text-sm">
-                  {skillsProjectsCertifications.certifications.map((cert, index) => <div key={cert.id} className="p-2 border rounded-md">
+                  {skillsProjects.certifications.map((cert, index) => <div key={cert.id} className="p-2 border rounded-md">
                         <p className="font-medium">{cert.title}</p>
                         <div className="text-muted-foreground">
                           Duration:{' '}
@@ -308,10 +305,10 @@ export function Summary({
                       </div>)}
                 </div>
               </div>}
-            {skillsProjectsCertifications.projects.length > 0 && <div>
+            {skillsProjects.projects.length > 0 && <div>
                 <h3 className="font-medium mb-2">Projects</h3>
                 <div className="space-y-2 text-sm">
-                  {skillsProjectsCertifications.projects.map((project, index) => <div key={project.id} className="p-2 border rounded-md">
+                  {skillsProjects.projects.map((project, index) => <div key={project.id} className="p-2 border rounded-md">
                         <p className="font-medium">{project.title}</p>
                         <p className="mt-1">{project.description}</p>
                         <div className="mt-2">
@@ -328,10 +325,10 @@ export function Summary({
                       </div>)}
                 </div>
               </div>}
-            {skillsProjectsCertifications.achievements.length > 0 && <div>
+            {skillsProjects.achievements.length > 0 && <div>
                 <h3 className="font-medium mb-2">Achievements</h3>
                 <div className="space-y-2 text-sm">
-                  {skillsProjectsCertifications.achievements.map((achievement, index) => <div key={achievement.id} className="p-2 border rounded-md">
+                  {skillsProjects.achievements.map((achievement, index) => <div key={achievement.id} className="p-2 border rounded-md">
                         <p>{achievement.description}</p>
                       </div>)}
                 </div>

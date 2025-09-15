@@ -139,6 +139,7 @@ export function PersonalInformation() {
               onChange={(e) => handleInputChange('mobileNumber', e.target.value)}
               type="tel" 
               placeholder="Enter mobile number" 
+              required
             />
           </FormControl>
           <FormMessage />

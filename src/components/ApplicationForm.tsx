@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from './ui/f_card';
@@ -17,16 +17,19 @@ import { Path } from "react-hook-form";
 const STEPS = [{
   id: 'personal-information' as FormStep,
   label: 'Personal Info'
-},  {
+}, 
+{
+  id:'academic-details' as FormStep,
+  label:'Academic-details'
+},
+{
   id: 'skills-projects-certifications' as FormStep,
   label: 'Skills & Projects'
 }, {
   id: 'uploads' as FormStep,
   label: 'Uploads'
-}, {
-  id: 'preferences-career-interests' as FormStep,
-  label: 'Preferences'
-}, {
+},
+ {
   id: 'summary' as FormStep,
   label: 'Summary'
 }];
