@@ -18,12 +18,12 @@ const HeroSection = () => {
             className="text-white space-y-6"
           >
             <div className="space-y-2">
-              <p className="text-lg font-medium">{t('checkYour')}</p>
+              <p className="text-2xl font-medium">{t('welcomeTo')}</p>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                {t('ticketStatus')}
+                {t('pmInternshipScheme')}
               </h1>
               <div className="bg-blue-600 text-white px-6 py-3 rounded-lg inline-block text-lg font-semibold">
-                {t('withAadhaar')}
+                {t('empoweringYouth')}
               </div>
             </div>
             
@@ -59,7 +59,7 @@ const HeroSection = () => {
                   <div>
                     <div className="text-sm font-semibold text-gray-800">भारत सरकार</div>
                     <div className="text-xs text-gray-600">GOVERNMENT OF INDIA</div>
-                    <div className="text-xs text-blue-600 mt-1">NAME: XXXX</div>
+                    <div className="text-sm font-semibold text-blue-600 mt-1">Hon’ble PM Shri Narendra Modi</div>
                   </div>
                 </div>
               </div>

@@ -26,11 +26,11 @@ export const translations = {
     announcement: "Welcome to PM Internship Portal. Apply now for exciting opportunities!",
     
 
-    checkYour: "Check your",
-    ticketStatus: "Ticket Status ",
-    withAadhaar: "with Aadhaar to Receive  Assistance.",
-    heroDescription: "To receive your assistance without any issues, make sure you have an account. !",
-    checkStatus: "Check Status",
+    welcomeTo: "Welcome to",
+    pmInternshipScheme: "PM Internship Scheme",
+    empoweringYouth: "Empowering India’s Youth",
+    heroDescription: "The PM Internship Scheme (PMIS) offers young students and graduates hands-on experience in governance, policy-making, and nation-building. A step towards nurturing talent, building skills, and shaping future leaders.",
+    checkStatus: "Apply Now",
     heroTitle: "PM Internship Scheme",
     heroSubtitle: "Empowering India's Youth Through Experiential Learning",
     applyNow: "Apply Now",

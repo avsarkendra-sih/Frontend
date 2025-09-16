@@ -127,19 +127,19 @@ const AboutSection = () => {
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div className="space-y-1">
                       <div className="text-2xl font-bold text-primary">12</div>
-                      <div className="text-sm text-muted-foreground">Week Program</div>
+                      <div className="text-sm text-muted-foreground">12 months real-life experience in India's top companies</div>
                     </div>
                     <div className="space-y-1">
-                      <div className="text-2xl font-bold text-primary">25+</div>
-                      <div className="text-sm text-muted-foreground">Ministries</div>
+                      <div className="text-2xl font-bold text-primary">25</div>
+                      <div className="text-sm text-muted-foreground">Sectors across all over India across 36 States/UTs & 735 Districts</div>
                     </div>
                     <div className="space-y-1">
-                      <div className="text-2xl font-bold text-primary">100+</div>
-                      <div className="text-sm text-muted-foreground">Projects</div>
+                      <div className="text-2xl font-bold text-primary">118K+</div>
+                      <div className="text-sm text-muted-foreground">Internship Opportunities from Various Sectors</div>
                     </div>
                     <div className="space-y-1">
-                      <div className="text-2xl font-bold text-primary">₹50K</div>
-                      <div className="text-sm text-muted-foreground">Stipend</div>
+                      <div className="text-2xl font-bold text-primary">₹5000</div>
+                      <div className="text-sm text-muted-foreground">Monthly assistance and One-time Grant of ₹6000 for incidentals</div>
                     </div>
                   </div>
                 </div>

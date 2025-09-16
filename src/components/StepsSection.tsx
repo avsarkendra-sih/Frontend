@@ -4,12 +4,12 @@ import { useRef } from 'react';
 import { 
   FileText, 
   UserCheck, 
-  Video, 
   Award, 
   ArrowRight,
   Clock,
   Calendar,
-  Users
+  Users,
+  TrendingUp
 } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
 
@@ -23,28 +23,36 @@ const StepsSection = () => {
       number: 1,
       icon: FileText,
       title: 'Online Application',
-      description: 'Fill out the comprehensive application form with your academic details and preferences.',
+      description: 'Complete the simple online form with your personal, academic, and preference details.',
       duration: '15 minutes',
       color: 'from-blue-500 to-blue-600',
     },
     {
       number: 2,
       icon: UserCheck,
-      title: 'Document Verification',
-      description: 'Upload required documents including academic transcripts, ID proof, and certificates.',
+      title: 'Adhaaar Verification',
+      description: 'Verify your Aadhaar to confirm identity and eligibility for the scheme.',
       duration: '2-3 days',
       color: 'from-green-500 to-green-600',
     },
     {
       number: 3,
-      icon: Video,
-      title: 'Virtual Interview',
-      description: 'Participate in a structured interview to assess your skills and motivation.',
+      icon: FileText,
+      title: 'Resume Generator',
+      description: 'Automatically generate a professional resume and highlight your skills.',
       duration: '30 minutes',
       color: 'from-purple-500 to-purple-600',
     },
     {
       number: 4,
+      icon: TrendingUp,
+      title: 'Skill enhancer(Career Guidance Roadmap)',
+      description: 'Get a personalized career roadmap with suggested skills, courses, and curated resources to boost your growth.',
+      duration: '30 minutes',
+      color: 'from-red-500 to-purple-600',
+    },
+    {
+      number: 5,
       icon: Award,
       title: 'Selection & Onboarding',
       description: 'Successful candidates receive offer letters and join the orientation program.',

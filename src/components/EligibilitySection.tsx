@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { GraduationCap, Calendar, MapPin, Award, CheckCircle, Users } from 'lucide-react';
+import { GraduationCap, Calendar, Award, CheckCircle, Users, Briefcase, Home } from 'lucide-react';
 
 const EligibilitySection = () => {
   const ref = useRef(null);
@@ -12,10 +12,8 @@ const EligibilitySection = () => {
       icon: GraduationCap,
       title: 'Education',
       requirements: [
-        'Final year students (UG/PG)',
-        'Recent graduates (within 2 years)',
-        'All streams welcome',
-        'Minimum 60% aggregate'
+        'Not Enrolled in Full Time Education',
+        'Passed 10th/12th/diploma/ITI',
       ],
       bgColor: 'from-blue-500/10 to-blue-600/5',
       iconColor: 'text-blue-600',
@@ -24,34 +22,28 @@ const EligibilitySection = () => {
       icon: Calendar,
       title: 'Age Criteria',
       requirements: [
-        'Age: 18-25 years',
-        'Valid government ID',
-        'Indian citizenship required',
-        'No work experience needed'
+        'Age: 21–24 years (as on last date of application)',
+        'Must be an Indian citizen',
       ],
       bgColor: 'from-green-500/10 to-green-600/5',
       iconColor: 'text-green-600',
     },
     {
-      icon: MapPin,
-      title: 'Location',
+      icon: Briefcase,
+      title: 'Job Status',
       requirements: [
-        'Delhi NCR preferred',
-        'Willing to relocate',
-        'Hybrid work model',
-        'Accommodation assistance'
+        'Not Employed Full Time',
+        'Not in internship, apprenticeship, or Govt. skill training',
       ],
       bgColor: 'from-purple-500/10 to-purple-600/5',
       iconColor: 'text-purple-600',
     },
     {
-      icon: Award,
-      title: 'Skills',
+      icon: Home,
+      title: 'Family Status',
       requirements: [
-        'Strong analytical thinking',
-        'Communication skills',
-        'Basic tech knowledge',
-        'Problem-solving attitude'
+        'No one is Earning more than ₹8 Lakhs PA',
+        'No family member in permanent/regular Govt. job',
       ],
       bgColor: 'from-orange-500/10 to-orange-600/5',
       iconColor: 'text-orange-600',
@@ -62,7 +54,7 @@ const EligibilitySection = () => {
     {
       icon: Users,
       title: 'Monthly Stipend',
-      description: '₹50,000 per month for 12 weeks',
+      description: '₹5,000 per month for 12 months',
     },
     {
       icon: GraduationCap,
@@ -190,10 +182,10 @@ const EligibilitySection = () => {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
         >
           {[
-            { value: '95%', label: 'Completion Rate' },
-            { value: '85%', label: 'Job Placement' },
-            { value: '4.8/5', label: 'Average Rating' },
-            { value: '10K+', label: 'Alumni Network' },
+            { value: '5', label: 'Qualifications' },
+            { value: '36', label: 'States/UTs' },
+            { value: '25', label: 'Sectors' },
+            { value: '735', label: 'Districts' },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}

@@ -28,11 +28,11 @@ const MainHeader = () => {
    
           <div className="flex items-center space-x-3 ml-8">
             <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">PI</span>
+              <span className="text-white font-bold text-lg">PMIS</span>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-orange-500">
-                Internship
+                PM Internship
               </h1>
               <div className="text-xs text-gray-600">GOVERNMENT INITIATIVE</div>
             </div>
