@@ -9,16 +9,16 @@ type PersonalInfo = {
   gender: string;
   dateOfBirth: Date | null;
   mobileNumber: string;
-  alternativeNumber: string;
-  linkedinProfile: string;
-  githubProfile: string;
+  altMobileNumber: string;
+  linkedinUrl: string;
+  githubUrl: string;
   permanentAddress: string;
   permanentPincode: string;
   currentAddress: string;
   currentPincode: string;
   sameAsPermanent: boolean;
   category: string;
-  disabilityStatus: boolean;
+  hasDisability: boolean;
 };
 
 type TenthDetails = {
@@ -185,23 +185,23 @@ type ApplicationFormState = {
   resetForm: () => void;
 };
 
-export const useApplicationFormStore = create<ApplicationFormState>((set, get) => ({
+export const useApplicationFormStore = create<ApplicationFormState>((set) => ({
   personalInfo: {
     fullName: "",
     email: "",
     gender: "",
     dateOfBirth: null,
     mobileNumber: "",
-    alternativeNumber: "",
-    linkedinProfile: "",
-    githubProfile: "",
+    altMobileNumber: "",
+    linkedinUrl: "",
+    githubUrl: "",
     permanentAddress: "",
     permanentPincode: "",
     currentAddress: "",
     currentPincode: "",
     sameAsPermanent: false,
     category: "",
-    disabilityStatus: false,
+    hasDisability: false,
   },
 
   academicDetails: {
@@ -559,16 +559,16 @@ export const useApplicationFormStore = create<ApplicationFormState>((set, get) =
           gender: "",
           dateOfBirth: null,
           mobileNumber: "",
-          alternativeNumber: "",
-          linkedinProfile: "",
-          githubProfile: "",
+          altMobileNumber: "",
+          linkedinUrl: "",
+          githubUrl: "",
           permanentAddress: "",
           permanentPincode: "",
           currentAddress: "",
           currentPincode: "",
           sameAsPermanent: false,
           category: "",
-          disabilityStatus: false,
+          hasDisability: false,
         },
         academicDetails: {
           nextQualification: "",
