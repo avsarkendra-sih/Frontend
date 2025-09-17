@@ -1,61 +1,57 @@
-import { motion } from 'framer-motion';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Facebook, 
-  Twitter, 
-  Linkedin, 
+import { motion } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
   Instagram,
   Accessibility,
   Type,
   Contrast,
-  ExternalLink
-} from 'lucide-react';
-import { useAccessibilityStore } from '@/store/useAccessibilityStore';
+  ExternalLink,
+} from "lucide-react";
+import { useAccessibilityStore } from "@/store/useAccessibilityStore";
 
 const Footer = () => {
-  const { 
-    toggleHighContrast, 
-    isHighContrast, 
-    fontSize, 
-    setFontSize 
-  } = useAccessibilityStore();
+  const { toggleHighContrast, isHighContrast, fontSize, setFontSize } =
+    useAccessibilityStore();
 
   const quickLinks = [
-    { name: 'About Program', href: '#about' },
-    { name: 'Eligibility', href: '#eligibility' },
-    { name: 'How to Apply', href: '#steps' },
-    { name: 'Contact', href: '#contact' },
+    { name: "About Program", href: "#about" },
+    { name: "Eligibility", href: "#eligibility" },
+    { name: "How to Apply", href: "#steps" },
+    { name: "Contact", href: "#contact" },
   ];
 
   const resources = [
-    { name: 'Application Form', href: '#', external: true },
-    { name: 'Guidelines', href: '#', external: true },
-    { name: 'FAQs', href: '#', external: true },
-    { name: 'Support', href: '#', external: true },
+    { name: "Application Form", href: "#", external: true },
+    { name: "Guidelines", href: "#", external: true },
+    { name: "FAQs", href: "#", external: true },
+    { name: "Support", href: "#", external: true },
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', name: 'Facebook' },
-    { icon: Twitter, href: '#', name: 'Twitter' },
-    { icon: Linkedin, href: '#', name: 'LinkedIn' },
-    { icon: Instagram, href: '#', name: 'Instagram' },
+    { icon: Facebook, href: "#", name: "Facebook" },
+    { icon: Twitter, href: "#", name: "Twitter" },
+    { icon: Linkedin, href: "#", name: "LinkedIn" },
+    { icon: Instagram, href: "#", name: "Instagram" },
   ];
 
   const accessibilityOptions = [
     {
       icon: Contrast,
-      label: 'High Contrast',
+      label: "High Contrast",
       action: toggleHighContrast,
       active: isHighContrast,
     },
   ];
 
   const fontSizeOptions = [
-    { label: 'Normal', value: 'normal' as const },
-    { label: 'Large', value: 'large' as const },
-    { label: 'Extra Large', value: 'extra-large' as const },
+    { label: "Normal", value: "normal" as const },
+    { label: "Large", value: "large" as const },
+    { label: "Extra Large", value: "extra-large" as const },
   ];
 
   return (
@@ -73,10 +69,12 @@ const Footer = () => {
               <Accessibility className="w-6 h-6 text-primary-foreground" />
               <div>
                 <h3 className="font-semibold text-lg">Accessibility Options</h3>
-                <p className="text-sm text-primary-foreground/80">Customize your experience</p>
+                <p className="text-sm text-primary-foreground/80">
+                  Customize your experience
+                </p>
               </div>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               {/* Font Size Controls */}
               <div className="flex items-center space-x-2">
@@ -89,8 +87,8 @@ const Footer = () => {
                       onClick={() => setFontSize(option.value)}
                       className={`px-3 py-1 rounded text-xs font-medium transition-colors gov-focus ${
                         fontSize === option.value
-                          ? 'bg-primary-foreground text-primary'
-                          : 'text-primary-foreground/70 hover:text-primary-foreground'
+                          ? "bg-primary-foreground text-primary"
+                          : "text-primary-foreground/70 hover:text-primary-foreground"
                       }`}
                     >
                       {option.label}
@@ -107,10 +105,10 @@ const Footer = () => {
                     onClick={option.action}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors gov-focus ${
                       option.active
-                        ? 'bg-primary-foreground text-primary'
-                        : 'bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20'
+                        ? "bg-primary-foreground text-primary"
+                        : "bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20"
                     }`}
-                    aria-label={`${option.active ? 'Disable' : 'Enable'} ${option.label.toLowerCase()}`}
+                    aria-label={`${option.active ? "Disable" : "Enable"} ${option.label.toLowerCase()}`}
                   >
                     <option.icon className="w-4 h-4" />
                     <span className="text-sm font-medium">{option.label}</span>
@@ -136,8 +134,9 @@ const Footer = () => {
               <h3 className="text-xl font-bold">PM Internship</h3>
             </div>
             <p className="text-primary-foreground/80 leading-relaxed">
-              Empowering India's brightest minds to shape the future of governance 
-              through innovation, technology, and public service excellence.
+              Empowering India's brightest minds to shape the future of
+              governance through innovation, technology, and public service
+              excellence.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -163,16 +162,22 @@ const Footer = () => {
             className="space-y-4"
           >
             <h3 className="text-lg font-semibold">Quick Links</h3>
-            <nav className="space-y-2" role="navigation" aria-label="Footer navigation">
+            <nav
+              className="space-y-2"
+              role="navigation"
+              aria-label="Footer navigation"
+            >
               {quickLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   className="block text-primary-foreground/80 hover:text-primary-foreground transition-colors gov-focus"
                   onClick={(e) => {
-                    if (link.href.startsWith('#')) {
+                    if (link.href.startsWith("#")) {
                       e.preventDefault();
-                      document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                      document
+                        .querySelector(link.href)
+                        ?.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
                 >
@@ -190,14 +195,18 @@ const Footer = () => {
             className="space-y-4"
           >
             <h3 className="text-lg font-semibold">Resources</h3>
-            <nav className="space-y-2" role="navigation" aria-label="Resources navigation">
+            <nav
+              className="space-y-2"
+              role="navigation"
+              aria-label="Resources navigation"
+            >
               {resources.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   className="flex items-center text-primary-foreground/80 hover:text-primary-foreground transition-colors gov-focus"
-                  target={link.external ? '_blank' : undefined}
-                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                 >
                   {link.name}
                   {link.external && <ExternalLink className="w-3 h-3 ml-1" />}
@@ -224,8 +233,8 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary-foreground/70" />
-                <a 
-                  href="tel:+911123456789" 
+                <a
+                  href="tel:+911123456789"
                   className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors gov-focus"
                 >
                   +91 11 2345 6789
@@ -233,8 +242,8 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary-foreground/70" />
-                <a 
-                  href="mailto:internship@mca.gov.in" 
+                <a
+                  href="mailto:internship@mca.gov.in"
                   className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors gov-focus"
                 >
                   internship@mca.gov.in
@@ -255,13 +264,22 @@ const Footer = () => {
             © 2024 Government of India. All rights reserved.
           </div>
           <div className="flex flex-wrap gap-6 text-sm">
-            <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors gov-focus">
+            <a
+              href="#"
+              className="text-primary-foreground/60 hover:text-primary-foreground transition-colors gov-focus"
+            >
               Privacy Policy
             </a>
-            <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors gov-focus">
+            <a
+              href="#"
+              className="text-primary-foreground/60 hover:text-primary-foreground transition-colors gov-focus"
+            >
               Terms of Service
             </a>
-            <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors gov-focus">
+            <a
+              href="#"
+              className="text-primary-foreground/60 hover:text-primary-foreground transition-colors gov-focus"
+            >
               Accessibility Statement
             </a>
           </div>

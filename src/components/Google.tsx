@@ -42,7 +42,7 @@ const Google = ({
       ) : (
         <div className="flex items-center">
           <FcGoogle className="w-5 h-5 mr-2" />
-          "Sign in with Google"
+          Sign in with Google
         </div>
       )}
     </Button>

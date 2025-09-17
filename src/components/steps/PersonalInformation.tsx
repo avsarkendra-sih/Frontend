@@ -1,4 +1,4 @@
-import  { useEffect } from 'react';
+import  { useEffect, useState } from 'react';
 
 import {  FormItem, FormLabel, FormControl, FormMessage } from '../ui/f_form';
 import { Input } from '../ui/f_input';
@@ -15,6 +15,10 @@ import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '../../lib/utils';
 import { useApplicationFormStore } from '@/store/useApplicationFormStore';
+import { useAuthStore } from '@/store/useAuthStore';
+import {supabase} from "../../lib/supabaseClient";
+
+
 export function PersonalInformation() {
     const {
     personalInfo,
@@ -22,6 +26,23 @@ export function PersonalInformation() {
     setSameAsPermanent,
   
   } = useApplicationFormStore();
+
+
+
+  useEffect(() => {
+    const fetchNameAndEmail = async () => {
+      const session = await supabase.auth.getUser();
+      console.log(session);
+      setPersonalInfo({
+        fullName: session.data.user.identities[0].identity_data.full_name
+      });
+      setPersonalInfo({
+        email: session.data.user.identities[0].identity_data.email
+      });
+    }
+
+    fetchNameAndEmail();
+  }, [])
 
   // Effect to handle address synchronization
  
@@ -45,8 +66,8 @@ export function PersonalInformation() {
               </FormLabel>
               <FormControl>
                 <Input
+                disabled
                   value={personalInfo.fullName} 
-                  disabled 
                   onChange={(e) => handleInputChange('fullName', e.target.value)} />
               </FormControl>
               <FormMessage />
@@ -58,10 +79,10 @@ export function PersonalInformation() {
             <InfoTooltip text="Your registered email address" />
           </FormLabel>
           <FormControl>
-            <Input 
+            <Input
+            disabled
               value={personalInfo.email} 
-              type="email" 
-              disabled 
+              type="email"  
               onChange={(e) => handleInputChange('email', e.target.value)}
             />
           </FormControl>
@@ -153,8 +174,8 @@ export function PersonalInformation() {
           </FormLabel>
           <FormControl>
             <Input 
-              value={personalInfo.alternativeNumber} 
-              onChange={(e) => handleInputChange('alternativeNumber', e.target.value)}
+              value={personalInfo.altMobileNumber} 
+              onChange={(e) => handleInputChange('altMobileNumber', e.target.value)}
               type="tel" 
               placeholder="Enter alternative number (optional)" 
             />
@@ -170,8 +191,8 @@ export function PersonalInformation() {
           </FormLabel>
           <FormControl>
             <Input 
-              value={personalInfo.linkedinProfile} 
-              onChange={(e) => handleInputChange('linkedinProfile', e.target.value)}
+              value={personalInfo.linkedinUrl} 
+              onChange={(e) => handleInputChange('linkedinUrl', e.target.value)}
               placeholder="https://linkedin.com/in/username" 
             />
           </FormControl>
@@ -186,8 +207,8 @@ export function PersonalInformation() {
           </FormLabel>
           <FormControl>
             <Input 
-              value={personalInfo.githubProfile} 
-              onChange={(e) => handleInputChange('githubProfile', e.target.value)}
+              value={personalInfo.githubUrl} 
+              onChange={(e) => handleInputChange('githubUrl', e.target.value)}
               placeholder="https://github.com/username" 
             />
           </FormControl>
@@ -319,8 +340,8 @@ export function PersonalInformation() {
           </div>
           <FormControl>
             <Switch 
-              checked={personalInfo.disabilityStatus} 
-              onCheckedChange={(checked) => handleInputChange('disabilityStatus', checked)}
+              checked={personalInfo.hasDisability} 
+              onCheckedChange={(checked) => handleInputChange('hasDisability', checked)}
             />
           </FormControl>
         </FormItem>

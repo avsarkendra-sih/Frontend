@@ -1,22 +1,21 @@
 export type FormStep = 'personal-information' | 'academic-details' | 'skills-projects-certifications' | 'uploads' | 'preferences-career-interests' | 'summary';
 export type FormData = {
   personalInfo: {
-    profilePhoto: File | null;
     fullName: string;
     email: string;
     gender: string;
     dateOfBirth: Date | null;
     mobileNumber: string;
-    alternativeNumber: string;
-    linkedinProfile: string;
-    githubProfile: string;
+    altMobileNumber: string;
+    linkedinUrl: string;
+    githubUrl: string;
     permanentAddress: string;
     permanentPincode: string;
     currentAddress: string;
     currentPincode: string;
     sameAsPermanent: boolean;
     category: string;
-    disabilityStatus: boolean;
+    hasDisablity: boolean;
   };
   academicDetails: {
     tenth: {
